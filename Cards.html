@@ -239,7 +239,7 @@
             box-shadow: 
                 inset 5px 0 20px rgba(0,0,0,0.1),
                 3px 3px 20px rgba(0,0,0,0.3);
-            display: flex;
+            display: ruby;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -357,6 +357,23 @@
             opacity: 0;
             transform: translateY(20px);
         }
+		
+		.location-link {
+			display: inline-block;
+			text-decoration: none;
+			color: inherit;
+			cursor: pointer;
+			transition: transform 0.2s ease, color 0.2s ease;
+		}
+		
+		.location-link:hover .location-name {
+			color: var(--wedding-gold);
+		}
+		
+		.location-link:hover {
+			transform: translateY(-2px);
+		}
+
 
         .book.open .location {
             animation: fadeSlideUp 0.8s ease 1.8s forwards;
@@ -458,115 +475,6 @@
             color: var(--wedding-gold);
         }
 
-        /* RSVP Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 10px;
-            max-width: 450px;
-            width: 90%;
-            position: relative;
-            animation: modalSlide 0.5s ease;
-        }
-
-        @keyframes modalSlide {
-            from { opacity: 0; transform: translateY(-50px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #888;
-            border: none;
-            background: none;
-            transition: color 0.3s ease;
-        }
-
-        .modal-close:hover {
-            color: var(--wedding-gold);
-        }
-
-        .modal-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem;
-            color: var(--wedding-gold);
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-subtitle {
-            font-style: italic;
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 1rem;
-            border: 2px solid #eee;
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--wedding-gold);
-        }
-
-        /* Music toggle */
-        .music-toggle {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--wedding-gold);
-            color: white;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            font-size: 1.5rem;
-        }
-
-        .music-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
-        }
-
-        .music-toggle.playing {
-            animation: musicPulse 1s ease-in-out infinite;
-        }
-
-        @keyframes musicPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-            50% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
-        }
-
         @@media (max-width: 500px) {
             .book {
                 width: 320px;
@@ -628,40 +536,16 @@
 
                 <div class="location">
                     <div class="location-icon">📍</div>
-                    <div class="location-name">Sattu Sagwan Banquet Hall</div>
-                    <div class="location-address">Budh Bazar, Gali No 8, Bandh Road</div>
-                    <div class="location-city">Sangam Vihar, New Delhi 110080</div>
-                </div>
-
-                <div class="action-buttons">
-                    <button class="btn-wedding" id="rsvpBtn">RSVP</button>
+					<a class="location-link" href="https://www.google.com/maps/search/?api=1&query=Sattu+Sagwan+Banquet+Hall+Sangam+Vihar+New+Delhi+110080" target="_blank" rel="noopener">
+						<div class="location-name">Sattu Sagwan Banquet Hall</div>
+						<div class="location-address">Budh Bazar, Gali No 8, Bandh Road</div>
+						<div class="location-city">Sangam Vihar, New Delhi 110080</div>
+					</a>
                 </div>
             </div>
 
             <!-- Spine -->
             <div class="book-spine"></div>
-        </div>
-    </div>
-
-    <!-- Music Toggle -->
-    <button class="music-toggle" id="musicToggle" title="Toggle Music">🎵</button>
-
-    <!-- RSVP Modal -->
-    <div class="modal-overlay" id="rsvpModal">
-        <div class="modal-content">
-            <button class="modal-close" id="modalClose">&times;</button>
-            <h2 class="modal-title">RSVP</h2>
-            <p class="modal-subtitle">We look forward to celebrating with you!</p>
-            <form id="rsvpForm">
-                <input type="text" class="form-input" placeholder="Your Name" required>
-                <input type="email" class="form-input" placeholder="Your Email" required>
-                <select class="form-input">
-                    <option value="">Will you attend?</option>
-                    <option value="accept">Joyfully Accept</option>
-                    <option value="decline">Regretfully Decline</option>
-                </select>
-                <button type="submit" class="btn-wedding" style="width: 100%; margin-top: 0.5rem;">Submit</button>
-            </form>
         </div>
     </div>
 
@@ -707,33 +591,6 @@
                 musicToggle.textContent = '🎵';
             }
         });
-
-        // RSVP Modal
-        const rsvpBtn = document.getElementById('rsvpBtn');
-        const rsvpModal = document.getElementById('rsvpModal');
-        const modalClose = document.getElementById('modalClose');
-        const rsvpForm = document.getElementById('rsvpForm');
-
-        rsvpBtn.addEventListener('click', () => {
-            rsvpModal.classList.add('active');
-        });
-
-        modalClose.addEventListener('click', () => {
-            rsvpModal.classList.remove('active');
-        });
-
-        rsvpModal.addEventListener('click', (e) => {
-            if (e.target === rsvpModal) {
-                rsvpModal.classList.remove('active');
-            }
-        });
-
-        rsvpForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your RSVP! 💐');
-            rsvpModal.classList.remove('active');
-        });
     </script>
-
 </body>
 </html>
