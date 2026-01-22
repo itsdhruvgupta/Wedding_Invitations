@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wedding of Dhruv & Ritika</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding of Dhruv &amp; Ritika</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&amp;family=Great+Vibes&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <style>
         :root {
-            --wedding-gold: #D4AF37;
-            --wedding-cream: #FFFDD0;
-            --wedding-dark: #2C3E50;
-            --cover-bg: linear-gradient(135deg, #8B4513 0%, #5D2E0C 50%, #8B4513 100%);
+            --wedding-gold: #E8B4A8;
+            --wedding-cream: #FFF9F5;
+            --wedding-dark: #6B5B5A;
+            --cover-bg: linear-gradient(135deg, #F8E8E3 0%, #FCEEE9 50%, #F8E8E3 100%);
         }
         
         * {
@@ -21,15 +22,21 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #FFF9F5 0%, #FFE9E0 50%, #FFF2EC 100%);
             font-family: 'Playfair Display', serif;
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             perspective: 2000px;
-            overflow: hidden;
+            overflow: auto;
+            padding: 20px;
         }
 
         /* Floating particles */
@@ -79,13 +86,13 @@
 
         .book.open {
             transform: rotateY(0);
+            cursor: default;
         }
 
         .book.open:hover {
             transform: rotateY(0);
         }
 
-        /* Front Cover */
         /* Front Cover Container */
         .front-cover {
             position: absolute;
@@ -113,8 +120,8 @@
         /* Front Face (Content) */
         .front-face {
             box-shadow: 
-                inset -3px 0 10px rgba(0,0,0,0.3),
-                5px 5px 30px rgba(0,0,0,0.5);
+                inset -3px 0 10px rgba(0,0,0,0.05),
+                5px 5px 30px rgba(0,0,0,0.08);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -133,100 +140,95 @@
 
         .book.open .front-cover {
             transform: rotateY(-160deg);
-            box-shadow: 
-                inset 3px 0 10px rgba(0,0,0,0.3),
-                -5px 5px 30px rgba(0,0,0,0.3);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.4);
         }
 
-        /* Cover decorative elements */
+        /* Close Button */
+        .close-book {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(232, 180, 168, 0.15);
+            border: 2px solid var(--wedding-gold);
+            border-radius: 50%;
+            color: var(--wedding-gold);
+            font-size: 24px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 200;
+            transition: all 0.3s ease;
+        }
+
+        .close-book:hover {
+            background: var(--wedding-gold);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .book.open .close-book {
+            display: flex;
+        }
+
+        /* Cover Decorations */
         .cover-border {
             position: absolute;
             top: 20px;
             left: 20px;
             right: 20px;
             bottom: 20px;
-            border: 3px double var(--wedding-gold);
-            border-radius: 3px 10px 10px 3px;
+            border-radius: 10px;
             pointer-events: none;
-            backface-visibility: hidden;
+            display: none;
         }
 
         .cover-corner {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border-color: var(--wedding-gold);
-            border-style: solid;
-            backface-visibility: hidden;
+            display: none;
         }
-
-        .cover-corner.tl { top: 30px; left: 30px; border-width: 3px 0 0 3px; }
-        .cover-corner.tr { top: 30px; right: 30px; border-width: 3px 3px 0 0; }
-        .cover-corner.bl { bottom: 30px; left: 30px; border-width: 0 0 3px 3px; }
-        .cover-corner.br { bottom: 30px; right: 30px; border-width: 0 3px 3px 0; }
 
         .cover-ornament {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            animation: glow 2s ease-in-out infinite alternate;
-            backface-visibility: hidden;
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse-ring 2s ease-in-out infinite;
         }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 5px var(--wedding-gold), 0 0 10px var(--wedding-gold); }
-            to { text-shadow: 0 0 20px var(--wedding-gold), 0 0 30px var(--wedding-gold), 0 0 40px var(--wedding-gold); }
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
 
         .cover-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            backface-visibility: hidden;
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            color: #C89B8C;
         }
 
         .cover-subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            opacity: 0.8;
-            backface-visibility: hidden;
+            font-family: 'Great Vibes', cursive;
+            font-size: 28px;
+            margin-bottom: 30px;
+            opacity: 0.85;
+            color: #B88A7C;
         }
 
         .cover-click-hint {
-            position: absolute;
-            bottom: 50px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
+            font-size: 14px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            opacity: 0.6;
-            animation: pulse 2s ease-in-out infinite;
-            transition: opacity 0.3s ease;
-            backface-visibility: hidden;
+            opacity: 0.7;
+            animation: fade-pulse 2s ease-in-out infinite;
         }
 
-        .book.open .cover-click-hint {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
-        }
-
-        /* Book Spine */
-        .book-spine {
-            position: absolute;
-            left: 0;
-            width: 30px;
-            height: 100%;
-            background: linear-gradient(90deg, #5D2E0C 0%, #8B4513 50%, #5D2E0C 100%);
-            transform: rotateY(-90deg) translateX(-15px);
-            transform-origin: right center;
-            border-radius: 5px 0 0 5px;
+        @keyframes fade-pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.9; }
         }
 
         /* Inside Pages */
@@ -234,350 +236,654 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #f5f0e5 0%, #fdfbf7 20%, #fdfbf7 100%);
-            border-radius: 3px 15px 15px 3px;
-            box-shadow: 
-                inset 5px 0 20px rgba(0,0,0,0.1),
-                3px 3px 20px rgba(0,0,0,0.3);
-            display: ruby;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2.5rem;
-            color: var(--wedding-dark);
-            text-align: center;
+            background: linear-gradient(to bottom, #FFFCF9 0%, #FFF5F0 100%);
+            border-radius: 0 15px 15px 0;
+            padding: 3rem 2.5rem;
             opacity: 0;
-            transition: opacity 0.5s ease 0.8s;
+            pointer-events: none;
+            transition: opacity 0.5s ease 0.6s;
+            overflow-y: auto;
+            box-shadow: 
+                inset 15px 0 20px -10px rgba(0,0,0,0.03),
+                5px 5px 20px rgba(0,0,0,0.06);
         }
 
         .book.open .inside-pages {
             opacity: 1;
+            pointer-events: auto;
         }
 
-        /* Page lines decoration */
-        .inside-pages::before {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 20px;
-            bottom: 20px;
-            width: 2px;
-            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.1) 10%, rgba(0,0,0,0.1) 90%, transparent);
+        /* Page Navigation */
+        .page {
+            min-height: 100%;
+            display: none;
+            flex-direction: column;
         }
 
-        /* Inside content */
+        .page.active {
+            display: flex;
+        }
+
+        .page-nav-btn {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: var(--wedding-gold);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(232, 180, 168, 0.3);
+            align-self: center;
+        }
+
+        .page-nav-btn:hover {
+            background: #D4A59A;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(232, 180, 168, 0.4);
+        }
+
+        .back-btn {
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+
         .invite-header {
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #888;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: none;
-        }
-
-        .book.open .invite-header {
-            animation: fadeSlideUp 0.8s ease 1s forwards;
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-style: italic;
+            text-align: center;
+            color: #9B8381;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
 
         .couple-names {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
+            font-size: 48px;
+            text-align: center;
             color: var(--wedding-gold);
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            min-height: 4rem;
+            line-height: 1.4;
+            margin-bottom: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-        }
-
-        .book.open .couple-names {
-            animation: fadeSlideUp 0.8s ease 1.2s forwards;
         }
 
         .ampersand {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.5rem;
-            color: #aaa;
-            display: block;
-            margin: 0.2rem 0;
+            font-size: 36px;
+            margin: 10px 0;
+            color: #B88A7C;
         }
 
         .invite-text {
-            font-style: italic;
-            font-size: 0.85rem;
-            color: #666;
-            margin: 1rem 0;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .book.open .invite-text {
-            animation: fadeSlideUp 0.8s ease 1.4s forwards;
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            text-align: center;
+            color: var(--wedding-dark);
+            margin-bottom: 35px;
+            line-height: 1.6;
         }
 
         .date-section {
-            border-top: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-            padding: 1.5rem 0;
-            margin: 1rem 0;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .book.open .date-section {
-            animation: fadeSlideUp 0.8s ease 1.6s forwards;
+            text-align: center;
+            margin-bottom: 35px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(232, 180, 168, 0.12) 0%, rgba(232, 180, 168, 0.06) 100%);
+            border-radius: 10px;
+            border: none;
         }
 
         .wedding-date {
             font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
+            font-size: 36px;
             font-weight: 700;
+            color: var(--wedding-gold);
             letter-spacing: 2px;
-            color: var(--wedding-dark);
         }
 
         .wedding-year {
-            font-size: 1rem;
-            letter-spacing: 5px;
-            color: #888;
-            margin-top: 0.3rem;
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            color: #B88A7C;
+            margin-top: 5px;
         }
 
         .location {
-            margin: 1rem 0;
-            opacity: 0;
-            transform: translateY(20px);
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            border: none;
         }
-		
-		.location-link {
-			display: inline-block;
-			text-decoration: none;
-			color: inherit;
-			cursor: pointer;
-			transition: transform 0.2s ease, color 0.2s ease;
-		}
-		
-		.location-link:hover .location-name {
-			color: var(--wedding-gold);
-		}
-		
-		.location-link:hover {
-			transform: translateY(-2px);
-		}
 
+        .location-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.3s ease;
+        }
 
-        .book.open .location {
-            animation: fadeSlideUp 0.8s ease 1.8s forwards;
+        .location-link:hover {
+            transform: scale(1.02);
         }
 
         .location-icon {
-            font-size: 1.2rem;
+            font-size: 14px;
             color: var(--wedding-gold);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .location-link:hover .location-icon {
+            color: #C89B8C;
+            text-decoration: underline;
         }
 
         .location-name {
-            font-size: 1.1rem;
-            margin: 0.3rem 0;
-        }
-
-        .location-city {
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .book.open .action-buttons {
-            animation: fadeSlideUp 0.8s ease 2s forwards;
-        }
-
-        .btn-wedding {
-            background: transparent;
-            border: 2px solid var(--wedding-gold);
-            color: var(--wedding-gold);
-            padding: 10px 25px;
             font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
+            font-size: 22px;
+            font-weight: 700;
+            color: #8B7371;
+            margin-bottom: 10px;
+        }
+
+        .location-address, .location-city {
+            font-size: 15px;
+            color: var(--wedding-dark);
+            line-height: 1.6;
+        }
+
+        /* Events Page Styles */
+        .events-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .events-title {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--wedding-gold);
+            margin-bottom: 10px;
             letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            cursor: pointer;
+        }
+
+        .events-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 22px;
+            color: #B88A7C;
+            opacity: 0.9;
+        }
+
+        .events-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .event-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            border: none;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            animation: slideInFromLeft 0.6s ease forwards;
+            opacity: 0;
         }
 
-        .btn-wedding::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--wedding-gold);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-            z-index: -1;
-        }
+        .event-card:nth-child(1) { animation-delay: 0.1s; }
+        .event-card:nth-child(2) { animation-delay: 0.2s; }
+        .event-card:nth-child(3) { animation-delay: 0.3s; }
+        .event-card:nth-child(4) { animation-delay: 0.4s; }
 
-        .btn-wedding:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-wedding:hover {
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        @keyframes fadeSlideUp {
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
             }
         }
 
-        /* Close button */
-        .close-book {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: #aaa;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease, color 0.3s ease;
-            z-index: 200;
+        .event-card:hover {
+            transform: translateX(5px);
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(232, 180, 168, 0.2);
         }
 
-        .book.open .close-book {
-            opacity: 1;
+        .event-card.highlight {
+            background: linear-gradient(135deg, rgba(232, 180, 168, 0.2) 0%, rgba(232, 180, 168, 0.1) 100%);
+            border: none;
         }
 
-        .close-book:hover {
+        .event-icon {
+            font-size: 40px;
+            flex-shrink: 0;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-name {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #8B7371;
+            margin-bottom: 5px;
+        }
+
+        .event-date {
+            font-size: 15px;
+            color: var(--wedding-dark);
+            margin-bottom: 3px;
+        }
+
+        .event-time {
+            font-size: 16px;
+            font-weight: 600;
             color: var(--wedding-gold);
         }
 
-        @@media (max-width: 500px) {
+        /* Book Spine */
+        .book-spine {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to right, #E8D5CF 0%, #F2E3DC 50%, #E8D5CF 100%);
+            transform: translateX(-20px);
+            border-radius: 5px 0 0 5px;
+            box-shadow: 
+                inset 2px 0 5px rgba(0,0,0,0.08),
+                -2px 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .book {
-                width: 320px;
+                width: 340px;
+                height: 510px;
+            }
+
+            .cover-title {
+                font-size: 32px;
+            }
+
+            .cover-subtitle {
+                font-size: 22px;
+            }
+
+            .couple-names {
+                font-size: 38px;
+            }
+
+            .wedding-date {
+                font-size: 30px;
+            }
+
+            .inside-pages {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .book {
+                width: 300px;
                 height: 450px;
             }
-            .cover-title { font-size: 2.5rem; }
-            .couple-names { font-size: 2.5rem; }
-            .inside-pages { padding: 1.5rem; }
+
+            .cover-ornament {
+                font-size: 60px;
+            }
+
+            .cover-title {
+                font-size: 28px;
+            }
+
+            .couple-names {
+                font-size: 32px;
+            }
+
+            .wedding-date {
+                font-size: 26px;
+            }
+
+            .location-name {
+                font-size: 18px;
+            }
         }
     </style>
-</head>
-<body>
-
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Book -->
-    <div class="book-container">
-        <div class="book" id="book">
-            <!-- Close Button -->
-            <span class="close-book" id="closeBook">✕</span>
-
-            <!-- Front Cover -->
-            <div class="front-cover" id="frontCover">
-                <!-- Front Face (Visible when closed) -->
-                <div class="front-face">
-                    <div class="cover-border"></div>
-                    <div class="cover-corner tl"></div>
-                    <div class="cover-corner tr"></div>
-                    <div class="cover-corner bl"></div>
-                    <div class="cover-corner br"></div>
-                    
-                    <div class="cover-ornament">💍</div>
-                    <div class="cover-title">Wedding Invitation</div>
-                    <div class="cover-subtitle">You are cordially invited</div>
-                    <div class="cover-click-hint">Click to Open</div>
-                </div>
-
-                <!-- Back Face (Visible on left when opened) -->
-                <div class="back-face"></div>
-            </div>
-
-            <!-- Inside Pages -->
-            <div class="inside-pages">
-                <div class="invite-header">Together with our families</div>
-
-                <div class="couple-names">
-                    Dhruv Gupta
-                    <span class="ampersand">&</span>
-                    Ritika Gupta
-                </div>
-
-                <p class="invite-text">Request the honor of your presence at our wedding ceremony</p>
-
-                <div class="date-section">
-                    <div class="wedding-date">February 06</div>
-                    <div class="wedding-year">2026</div>
-                </div>
-
-                <div class="location">
-                  
-					<a class="location-link" href="https://www.google.com/maps/search/?api=1&query=Sattu+Sagwan+Banquet+Hall+Sangam+Vihar+New+Delhi+110080" target="_blank" rel="noopener">
-						  <div class="location-icon">🚩Click here to locate</div>
-						<div class="location-name">Sattu Sagwan Banquet Hall</div>
-						<div class="location-address">Budh Bazar, Gali No 8, Bandh Road</div>
-						<div class="location-city">Sangam Vihar, New Delhi 110080</div>
-					</a>
-                </div>
-            </div>
-
-			<div class="inside-pages">
-                <div class="invite-header">Together with our families</div>
-
-                <div class="couple-names">
-                    Dhruv Gupta
-                    <span class="ampersand">&</span>
-                    Ritika Gupta
-                </div>
-
-                <p class="invite-text">Request the honor of your presence at our wedding ceremony</p>
-
-                <div class="date-section">
-                    <div class="wedding-date">February 06</div>
-                    <div class="wedding-year">2026</div>
-                </div>
-
-                <div class="location">
-                  
-					<a class="location-link" href="https://www.google.com/maps/search/?api=1&query=Sattu+Sagwan+Banquet+Hall+Sangam+Vihar+New+Delhi+110080" target="_blank" rel="noopener">
-						  <div class="location-icon">🚩Click here to locate</div>
-						<div class="location-name">Sattu dasasasas Hall</div>
-						<div class="location-address">Budh Bazar, Gali No 8, Bandh Road</div>
-						<div class="location-city">Sangam Vihar, New Delhi 110080</div>
-					</a>
-                </div>
-            </div>
-
-            <!-- Spine -->
-            <div class="book-spine"></div>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Floating Particles -->
+  <div class="particles" id="particles"></div><!-- Book -->
+  <div class="book-container">
+   <div class="book" id="book"><!-- Close Button --> <span class="close-book" id="closeBook">✕</span> <!-- Front Cover -->
+    <div class="front-cover" id="frontCover"><!-- Front Face (Visible when closed) -->
+     <div class="front-face">
+      <div class="cover-border"></div>
+      <div class="cover-corner tl"></div>
+      <div class="cover-corner tr"></div>
+      <div class="cover-corner bl"></div>
+      <div class="cover-corner br"></div>
+      <div class="cover-ornament">
+       💍
+      </div>
+      <div class="cover-title" id="coverTitle">
+       Wedding Invitation
+      </div>
+      <div class="cover-subtitle" id="coverSubtitle">
+       You are cordially invited
+      </div>
+      <div class="cover-click-hint">
+       Click to Open
+      </div>
+     </div><!-- Back Face (Visible on left when opened) -->
+     <div class="back-face"></div>
+    </div><!-- Inside Pages -->
+    <div class="inside-pages"><!-- Page 1: Main Invitation -->
+     <div class="page page-1" id="page1">
+      <div class="invite-header" id="inviteHeader">
+       Together with our families
+      </div>
+      <div class="couple-names"><span id="groomName">Dhruv Gupta</span> <span class="ampersand">&amp;</span> <span id="brideName">Ritika Gupta</span>
+      </div>
+      <p class="invite-text" id="inviteText">Request the honor of your presence at our wedding ceremony</p>
+      <div class="date-section">
+       <div class="wedding-date" id="weddingDate">
+        February 06
+       </div>
+       <div class="wedding-year" id="weddingYear">
+        2026
+       </div>
+      </div>
+      <div class="location"><a class="location-link" href="https://www.google.com/maps/search/?api=1&amp;query=Sattu+Sagwan+Banquet+Hall+Sangam+Vihar+New+Delhi+110080" target="_blank" rel="noopener noreferrer">
+        <div class="location-icon">
+         🚩Click here to locate
         </div>
-    </div>
+        <div class="location-name" id="venueName">
+         Sattu Sagwan Banquet Hall
+        </div>
+        <div class="location-address" id="venueAddress">
+         Budh Bazar, Gali No 8, Bandh Road
+        </div>
+        <div class="location-city" id="venueCity">
+         Sangam Vihar, New Delhi 110080
+        </div></a>
+      </div><button class="page-nav-btn" id="nextPageBtn"> View Events Schedule → </button>
+     </div><!-- Page 2: Events Schedule -->
+     <div class="page page-2" id="page2"><button class="page-nav-btn back-btn" id="prevPageBtn"> ← Back to Invitation </button>
+      <div class="events-header">
+       <div class="events-title">
+        Celebration Events
+       </div>
+       <div class="events-subtitle">
+        Join us in our joyous ceremonies
+       </div>
+      </div>
+      <div class="events-timeline"><!-- Haldi Event -->
+       <div class="event-card">
+        <div class="event-icon">
+         🌼
+        </div>
+        <div class="event-content">
+         <div class="event-name" id="event1Name">
+          Haldi Ceremony
+         </div>
+         <div class="event-date" id="event1Date">
+          4th February 2026
+         </div>
+         <div class="event-time" id="event1Time">
+          10:00 AM
+         </div>
+        </div>
+       </div><!-- Mehndi Event -->
+       <div class="event-card">
+        <div class="event-icon">
+         💅
+        </div>
+        <div class="event-content">
+         <div class="event-name" id="event2Name">
+          Mehndi &amp; Mandap
+         </div>
+         <div class="event-date" id="event2Date">
+          5th February 2026
+         </div>
+         <div class="event-time" id="event2Time">
+          10:00 AM - 6:00 PM
+         </div>
+        </div>
+       </div><!-- Barat Event -->
+       <div class="event-card">
+        <div class="event-icon">
+         🎊
+        </div>
+        <div class="event-content">
+         <div class="event-name" id="event3Name">
+          Barat Departure
+         </div>
+         <div class="event-date" id="event3Date">
+          6th February 2026
+         </div>
+         <div class="event-time" id="event3Time">
+          6:00 PM
+         </div>
+        </div>
+       </div><!-- Arrival Event -->
+       <div class="event-card highlight">
+        <div class="event-icon">
+         💒
+        </div>
+        <div class="event-content">
+         <div class="event-name" id="event4Name">
+          Arrival at Venue
+         </div>
+         <div class="event-date" id="event4Date">
+          6th February 2026
+         </div>
+         <div class="event-time" id="event4Time">
+          7:00 PM
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Spine -->
+    <div class="book-spine"></div>
+   </div>
+  </div>
+  <script>
+        // Default configuration
+        const defaultConfig = {
+            background_color: "#1a1a2e",
+            gold_color: "#D4AF37",
+            cover_color: "#8B4513",
+            text_color: "#2C3E50",
+            page_color: "#FFFEF7",
+            cover_title: "Wedding Invitation",
+            cover_subtitle: "You are cordially invited",
+            invite_header: "Together with our families",
+            groom_name: "Dhruv Gupta",
+            bride_name: "Ritika Gupta",
+            invite_text: "Request the honor of your presence at our wedding ceremony",
+            wedding_date: "February 06",
+            wedding_year: "2026",
+            venue_name: "Sattu Sagwan Banquet Hall",
+            venue_address: "Budh Bazar, Gali No 8, Bandh Road",
+            venue_city: "Sangam Vihar, New Delhi 110080",
+            event1_name: "Haldi Ceremony",
+            event1_date: "4th February 2026",
+            event1_time: "10:00 AM",
+            event2_name: "Mehndi & Mandap",
+            event2_date: "5th February 2026",
+            event2_time: "10:00 AM - 6:00 PM",
+            event3_name: "Barat Departure",
+            event3_date: "6th February 2026",
+            event3_time: "6:00 PM",
+            event4_name: "Arrival at Venue",
+            event4_date: "6th February 2026",
+            event4_time: "7:00 PM"
+        };
 
-    <script>
+        // Apply configuration to UI
+        async function onConfigChange(config) {
+            const goldColor = config.gold_color || defaultConfig.gold_color;
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const coverColor = config.cover_color || defaultConfig.cover_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const pageColor = config.page_color || defaultConfig.page_color;
+
+            // Apply colors
+            document.documentElement.style.setProperty('--wedding-gold', goldColor);
+            document.documentElement.style.setProperty('--wedding-dark', textColor);
+            document.body.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, ${adjustColorBrightness(backgroundColor, 20)} 50%, ${adjustColorBrightness(backgroundColor, 40)} 100%)`;
+            
+            // Update cover background
+            const coverBg = `linear-gradient(135deg, ${coverColor} 0%, ${adjustColorBrightness(coverColor, -20)} 50%, ${coverColor} 100%)`;
+            document.querySelectorAll('.front-face, .back-face').forEach(el => {
+                el.style.background = coverBg;
+            });
+
+            // Update inside pages background
+            const insidePages = document.querySelector('.inside-pages');
+            if (insidePages) {
+                insidePages.style.background = `linear-gradient(to bottom, ${pageColor} 0%, ${adjustColorBrightness(pageColor, -10)} 100%)`;
+            }
+
+            // Update text content
+            document.getElementById('coverTitle').textContent = config.cover_title || defaultConfig.cover_title;
+            document.getElementById('coverSubtitle').textContent = config.cover_subtitle || defaultConfig.cover_subtitle;
+            document.getElementById('inviteHeader').textContent = config.invite_header || defaultConfig.invite_header;
+            document.getElementById('groomName').textContent = config.groom_name || defaultConfig.groom_name;
+            document.getElementById('brideName').textContent = config.bride_name || defaultConfig.bride_name;
+            document.getElementById('inviteText').textContent = config.invite_text || defaultConfig.invite_text;
+            document.getElementById('weddingDate').textContent = config.wedding_date || defaultConfig.wedding_date;
+            document.getElementById('weddingYear').textContent = config.wedding_year || defaultConfig.wedding_year;
+            document.getElementById('venueName').textContent = config.venue_name || defaultConfig.venue_name;
+            document.getElementById('venueAddress').textContent = config.venue_address || defaultConfig.venue_address;
+            document.getElementById('venueCity').textContent = config.venue_city || defaultConfig.venue_city;
+            
+            // Update events
+            document.getElementById('event1Name').textContent = config.event1_name || defaultConfig.event1_name;
+            document.getElementById('event1Date').textContent = config.event1_date || defaultConfig.event1_date;
+            document.getElementById('event1Time').textContent = config.event1_time || defaultConfig.event1_time;
+            document.getElementById('event2Name').textContent = config.event2_name || defaultConfig.event2_name;
+            document.getElementById('event2Date').textContent = config.event2_date || defaultConfig.event2_date;
+            document.getElementById('event2Time').textContent = config.event2_time || defaultConfig.event2_time;
+            document.getElementById('event3Name').textContent = config.event3_name || defaultConfig.event3_name;
+            document.getElementById('event3Date').textContent = config.event3_date || defaultConfig.event3_date;
+            document.getElementById('event3Time').textContent = config.event3_time || defaultConfig.event3_time;
+            document.getElementById('event4Name').textContent = config.event4_name || defaultConfig.event4_name;
+            document.getElementById('event4Date').textContent = config.event4_date || defaultConfig.event4_date;
+            document.getElementById('event4Time').textContent = config.event4_time || defaultConfig.event4_time;
+        }
+
+        // Helper function to adjust color brightness
+        function adjustColorBrightness(hex, percent) {
+            const num = parseInt(hex.replace('#', ''), 16);
+            const amt = Math.round(2.55 * percent);
+            const R = Math.min(255, Math.max(0, (num >> 16) + amt));
+            const G = Math.min(255, Math.max(0, (num >> 8 & 0x00FF) + amt));
+            const B = Math.min(255, Math.max(0, (num & 0x0000FF) + amt));
+            return '#' + (0x1000000 + (R * 0x10000) + (G * 0x100) + B).toString(16).slice(1);
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.gold_color || defaultConfig.gold_color,
+                            set: (value) => {
+                                config.gold_color = value;
+                                window.elementSdk.setConfig({ gold_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.cover_color || defaultConfig.cover_color,
+                            set: (value) => {
+                                config.cover_color = value;
+                                window.elementSdk.setConfig({ cover_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.page_color || defaultConfig.page_color,
+                            set: (value) => {
+                                config.page_color = value;
+                                window.elementSdk.setConfig({ page_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["cover_title", config.cover_title || defaultConfig.cover_title],
+                    ["cover_subtitle", config.cover_subtitle || defaultConfig.cover_subtitle],
+                    ["invite_header", config.invite_header || defaultConfig.invite_header],
+                    ["groom_name", config.groom_name || defaultConfig.groom_name],
+                    ["bride_name", config.bride_name || defaultConfig.bride_name],
+                    ["invite_text", config.invite_text || defaultConfig.invite_text],
+                    ["wedding_date", config.wedding_date || defaultConfig.wedding_date],
+                    ["wedding_year", config.wedding_year || defaultConfig.wedding_year],
+                    ["venue_name", config.venue_name || defaultConfig.venue_name],
+                    ["venue_address", config.venue_address || defaultConfig.venue_address],
+                    ["venue_city", config.venue_city || defaultConfig.venue_city],
+                    ["event1_name", config.event1_name || defaultConfig.event1_name],
+                    ["event1_date", config.event1_date || defaultConfig.event1_date],
+                    ["event1_time", config.event1_time || defaultConfig.event1_time],
+                    ["event2_name", config.event2_name || defaultConfig.event2_name],
+                    ["event2_date", config.event2_date || defaultConfig.event2_date],
+                    ["event2_time", config.event2_time || defaultConfig.event2_time],
+                    ["event3_name", config.event3_name || defaultConfig.event3_name],
+                    ["event3_date", config.event3_date || defaultConfig.event3_date],
+                    ["event3_time", config.event3_time || defaultConfig.event3_time],
+                    ["event4_name", config.event4_name || defaultConfig.event4_name],
+                    ["event4_date", config.event4_date || defaultConfig.event4_date],
+                    ["event4_time", config.event4_time || defaultConfig.event4_time]
+                ])
+            });
+        }
+
         // Particle generation
         const particlesContainer = document.getElementById('particles');
         for (let i = 0; i < 25; i++) {
@@ -598,6 +904,7 @@
 
         frontCover.addEventListener('click', () => {
             book.classList.add('open');
+            showPage(1);
         });
 
         closeBook.addEventListener('click', (e) => {
@@ -605,20 +912,29 @@
             book.classList.remove('open');
         });
 
-        // Music toggle
-        const musicToggle = document.getElementById('musicToggle');
-        let isPlaying = false;
+        // Page navigation
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const nextPageBtn = document.getElementById('nextPageBtn');
+        const prevPageBtn = document.getElementById('prevPageBtn');
 
-        musicToggle.addEventListener('click', () => {
-            isPlaying = !isPlaying;
-            if (isPlaying) {
-                musicToggle.classList.add('playing');
-                musicToggle.textContent = '🎶';
-            } else {
-                musicToggle.classList.remove('playing');
-                musicToggle.textContent = '🎵';
+        function showPage(pageNum) {
+            if (pageNum === 1) {
+                page1.classList.add('active');
+                page2.classList.remove('active');
+            } else if (pageNum === 2) {
+                page1.classList.remove('active');
+                page2.classList.add('active');
             }
+        }
+
+        nextPageBtn.addEventListener('click', () => {
+            showPage(2);
+        });
+
+        prevPageBtn.addEventListener('click', () => {
+            showPage(1);
         });
     </script>
-</body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c1d069216a7e334',t:'MTc2OTA2MzY2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
